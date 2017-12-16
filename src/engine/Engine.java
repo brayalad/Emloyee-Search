@@ -15,14 +15,24 @@ public class Engine {
 	private UserInterface ui;
 	private Map<Integer,List<Employee>> listOfAllEmployees;
 	private List<Employee> listOfEmployeesWithSameID;
+	
+	public Engine(){
+		listOfAllEmployees = new HashMap<>();
+	}
+	
 	public Engine(UserInterface ui){
 		this.ui = ui;
 		listOfAllEmployees = new HashMap<>();
 	}
-
+	
 	public void start(){
 		scanEmployeeFile();
-		run();
+		run(45);
+	}
+	
+	public String run(int ID){
+		scanEmployeeFile();
+		return getList(ID);
 	}
 	
 	private void run(){
@@ -30,29 +40,39 @@ public class Engine {
 		while(true){
 			ui.message("getInput");
 			try {
-				ui.printList(listOfAllEmployees.get(ui.getInput()));
+				int input = -1;
+				try {
+					input = ui.getInput();
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
+				ui.printList(listOfAllEmployees.get(input));
 			} catch (Exception e) {
 				ui.message("idError");
 			}
 		}
 	}
 	
-	
-	
-	private void scanEmployeeFile() {
+	private void scanEmployeeFile(){
 		try {
-			readFile = new Scanner(new File("employee.txt"));
+			readFile = new Scanner(new File("id.txt"));
 		} catch (FileNotFoundException e) {
 			ui.message("fileNotFound");
 		}
-		while(readFile.hasNext()) {
+		while(readFile.hasNextLine()){
+
 			int ID = Integer.parseInt(readFile.next());
-			String name = readFile.next();
-			String companyName = readFile.next();
-	
-			putObjects(listOfAllEmployees, ID, new Employee(ID,name,companyName));
+			String info = readFile.nextLine();
+		
+			
+			putObjects(listOfAllEmployees, ID, new Employee(ID,info));
+			
+			
 		}
 	}
+	
+	
 
 	private void putObjects(Map<Integer, List<Employee>> employeeList, int ID, Employee employee) {
 		
@@ -67,5 +87,17 @@ public class Engine {
 		
 	}
 	
+	public String getList(int input){
 	
+		String returnList = "";
+		List<Employee> list = listOfAllEmployees.get(input);
+		
+		for(int i = 0; i < list.size(); i++)
+			returnList = "" + returnList + "\n"+ list.get(i);
+		
+		System.out.println(returnList);
+		
+		return returnList;
+		
+	}
 }

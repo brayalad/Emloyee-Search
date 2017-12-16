@@ -4,16 +4,13 @@ public class Employee implements Person {
 
 	private int ID;
 	
-	private String name;
-	
-	private String companyName;
+	private String info;
 	
 	
-	public Employee(int ID, String name, String companyName){
+	public Employee(int ID, String info){
 		
 		this.ID = ID;
-		this.name = name;
-		this.companyName = companyName;
+		this.info = info;
 		
 	}
 
@@ -24,22 +21,12 @@ public class Employee implements Person {
 		return ID;
 	}
 
-
-	
-	public String getName() {
-		
-		return name;
-	}
-
-
-	
-	public String getCompanyName() {
-		
-		return companyName;
+	public String getInfo(){
+		return info;
 	}
 	
 	public String toString(){
-		return "" + ID + " " + name + " " + companyName;
+		return "" + ID + " " + info;
 	}
 	
 	

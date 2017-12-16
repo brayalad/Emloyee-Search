@@ -1,5 +1,6 @@
 package userinterface;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,7 +15,15 @@ public class TextUserInterface implements UserInterface{
 	}
 	
 	public int getInput(){
-		return input.nextInt();
+		
+		int user = -1;
+		try {
+			user = input.nextInt();
+		} catch (InputMismatchException Exception) {
+			
+			input.nextLine();
+		}
+		return user;
 	}
 
 
