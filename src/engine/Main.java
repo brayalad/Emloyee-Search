@@ -18,74 +18,35 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
-public class Main extends Application implements EventHandler<ActionEvent>{
+public class Main extends Application{
 
-	Button button;
-	TextField textField;
-	StackPane layout;
-	GridPane grid;
-	Scene scene;
-	Text text;
-	TextArea textArea;
-	Engine engine;
+	
 	
 	public static void main(String[] args) {
 		
-		while(true)
-		launch(args);
 		
+		launch(args);
 		
 
 	}
 
-
-	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		engine = new Engine();
-		textField = new TextField();
-		button = new Button("Search");
-		layout = new StackPane();
-		grid = new GridPane();
-		text = new Text();
-		textArea = new TextArea();
-		button.setTranslateX(50);
-		button.setTranslateY(-122);
-		grid.setVgap(4);
-		grid.setHgap(10);
-		grid.setPadding(new Insets(5,5,5,5));
-		grid.add(new Label("ID: "), 2, 3);
-		grid.add(textField, 3, 3);
-		textArea.setPrefRowCount(10);
-		textArea.setPrefColumnCount(20);
-		textArea.setWrapText(true);
+		Parent parent = FXMLLoader.load(getClass().getResource("UserIDGUI.fxml"));
 		
-		layout.getChildren().addAll(grid, button);
-		scene = new Scene(layout,400, 300);
-		
-		button.setOnAction(e -> print(layout,engine.run(Integer.parseInt(textField.getText()))));
-		
+		Scene scene = new Scene(parent);
+		primaryStage.setTitle("Employee ID Search");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
-	
 		
 	}
 
-	@Override
-	public void handle(ActionEvent event) {
-		
-		
-	}
 
 	
-	public void print(Node node, String list){
-		
-		
-		text.setText(list);
-		layout.getChildren().add(text);
-		
-	}
+	
 }
