@@ -36,7 +36,7 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		Parent parent = FXMLLoader.load(getClass().getResource("UserIDGUI.fxml"));
+		Parent parent = FXMLLoader.load(getClass().getResource("applicatiion/UserIDGUI.fxml"));
 		
 		Scene scene = new Scene(parent);
 		primaryStage.setTitle("Employee ID Search");
